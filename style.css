@@ -946,6 +946,20 @@ form button {
     }
 }
 
+.modal__fade {
+    animation-name: modalfade;
+    animation-duration: 0.5s
+}
+
+@keyframes modalfade {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY (0);
+    }
+}
+
 
 /* loader uchun */
 

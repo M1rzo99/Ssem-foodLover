@@ -92,7 +92,52 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
     }
-    setClock('.timer', deadline)
+    setClock('.timer', deadline);
+
+
+    // Modal
+
+    const openModalBtn = document.querySelectorAll("[data-modal]"), // querySelectortAll bolgani un tog'ridan - to'g'ri amal qo'sha olmaymiz
+        modal = document.querySelector('.modal'),
+        modalCloseBtn = document.querySelector('[data-modal-close]'),
+        modalContent = document.querySelector(".modal__content");
+
+
+    function OpenModal() {
+        modal.classList.add('show'); // fade bu animation 
+        modal.classList.remove('hide')
+        modalContent.classList.add('modal__fade')
+        document.body.style.overflow = 'hidden';
+        clearInterval(modalTimerOut) // agar user contact us ga 5 sek dan oldin click qilsa, contact us ni boshqa ko'rsatmaslik functioni 
+    }
+    openModalBtn.forEach(btn => {
+        btn.addEventListener('click', OpenModal)
+    });
+
+
+    function closeModal() {
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = ''
+    };
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // ekranni click qilganda ochilib turgan element yopilish functioni
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal()
+        }
+    })
+
+    // escape ni bosganda modal oynamiz yopilish functioni;
+    document.addEventListener('keydown', (event) => {
+        if (event.code === "Escape" && modal.classList.contains("show")) {
+            closeModal();
+        }
+    });
+
+    // user saytga kirganda 5 sek dan kn contact Us elementi ko'rsanadi
+    const modalTimerOut = setTimeout(OpenModal, 5000)
 
 
 });
