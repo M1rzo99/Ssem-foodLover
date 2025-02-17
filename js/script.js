@@ -204,4 +204,48 @@ window.addEventListener("DOMContentLoaded", () => {
         const { src, alt, title, descr, discount, sale } = event
         new OfferMenu(src, alt, title, descr, discount, sale, ".offers-items").render()
     })
+    class DayTime {
+        constructor(src, alt, title, descr, parElement) {
+            this.src = src
+            this.alt = alt
+            this.title = title
+            this.descr = descr
+            this.parent1 = document.querySelector(parElement)
+        }
+        render() {
+            const parDiv = document.createElement('div')
+            parDiv.innerHTML = `
+            <img src="${this.src}"
+             alt="${this.alt}">
+             <h3>${this.title}</h3>
+                <p>${this.descr}</p>
+            `
+            this.parent1.append(parDiv)
+        }
+    }
+    const offers1 = [{
+        src: "./img/breckfastIcon.png",
+        alt: "Breakfast",
+        title: "Breakfast",
+        descr: '8:00 am to 10:00 am'
+    }, {
+        src: "./img/lunchIcon.png",
+        alt: "Lunch",
+        title: "Lunch",
+        descr: '04:00 pm to 07:00 pm'
+    }, {
+        src: "./img/dinnerIcon.png",
+        alt: "Dinner",
+        title: "Dinner",
+        descr: '9:00 pm to 1:00 Am'
+    }, {
+        src: "./img/dessertIcon.png",
+        alt: "dessert",
+        title: "Dessert",
+        descr: ' all day'
+    }]
+    offers1.forEach(event => {
+        const { src, alt, title, descr } = event
+        new DayTime(src, alt, title, descr, ".daytime-items").render()
+    })
 });
