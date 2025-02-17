@@ -120,6 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
         modal.classList.remove('show');
         document.body.style.overflow = ''
     };
+
     modalCloseBtn.addEventListener('click', closeModal);
 
     // ekranni click qilganda ochilib turgan element yopilish functioni
@@ -137,7 +138,70 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // user saytga kirganda 5 sek dan kn contact Us elementi ko'rsanadi
-    const modalTimerOut = setTimeout(OpenModal, 5000)
+    const modalTimerOut = setTimeout(OpenModal, 4000)
 
 
+    //Class
+    // HTML dagi elementlarni js ga ko'chirib ishlatib ko'rdik 'class' lar yordamida:
+    class OfferMenu {
+        constructor(src, alt, title, descr, discount, sale, parentSelector) {
+            this.src = src
+            this.alt = alt
+            this.title = title
+            this.descr = descr
+            this.discount = discount
+            this.sale = sale
+            this.parent = document.querySelector(parentSelector)
+            this.formtToUSD()
+        }
+
+        formtToUSD() { // Bizni numberlarimizni USD ga ozgartirib beradi:
+            this.discount = this.discount.toLocaleString("en-US", { style: "currency", currency: "USD" });
+            this.sale = this.sale.toLocaleString("en-US", { style: "currency", currency: "USD" });
+        }
+
+        render() { // render - websaytga nimadir yuklab qoyamiz; 
+            // element nomli div yaratib uni html ga qoshib qoyamiz;
+            const element = document.createElement('div');
+
+            element.innerHTML = `
+                    
+                        <img src="${this.src}" alt="${this.alt}">
+                        <div>
+                            <h3>${this.title}</h3>
+                            <p>${this.descr}</p>
+                            <p><del>${this.discount}</del> <span class="primary-text">${this.sale}</span></p>
+                        </div>
+                        `
+            this.parent.append(element) // parent div iga element nomli div ni elementlarini yuklab qoyayapmiz
+        }
+    }
+
+    const offers = [{
+        src: "./img/offer1.png",
+        alt: "Quattro Pasta",
+        title: "Quattro Pasta",
+        descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+        discount: 55,
+        sale: 20
+    }, {
+        src: "./img/offer2.png",
+        alt: "Gluten-Free Pasta",
+        title: "Gluten-Free Pasta",
+        descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+        discount: 75,
+        sale: 25
+    }, {
+        src: "./img/offer3.png",
+        alt: "Vegertarian Pasta",
+        title: "Vegertarian Pasta",
+        descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+        discount: 80,
+        sale: 40
+    }];
+
+    offers.forEach(event => {
+        const { src, alt, title, descr, discount, sale } = event
+        new OfferMenu(src, alt, title, descr, discount, sale, ".offers-items").render()
+    })
 });
