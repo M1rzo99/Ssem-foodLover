@@ -142,6 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     //Class
+
     // HTML dagi elementlarni js ga ko'chirib ishlatib ko'rdik 'class' lar yordamida:
     class OfferMenu {
         constructor(src, alt, title, descr, discount, sale, parentSelector) {
@@ -204,6 +205,9 @@ window.addEventListener("DOMContentLoaded", () => {
         const { src, alt, title, descr, discount, sale } = event
         new OfferMenu(src, alt, title, descr, discount, sale, ".offers-items").render()
     })
+
+    // change html daytime-items section to class
+
     class DayTime {
         constructor(src, alt, title, descr, parElement) {
             this.src = src
@@ -248,4 +252,31 @@ window.addEventListener("DOMContentLoaded", () => {
         const { src, alt, title, descr } = event
         new DayTime(src, alt, title, descr, ".daytime-items").render()
     })
+
+    // form - telegram bot orqali ulash
+
+    const form = document.querySelector("form"),
+        telegramTookenBot = '7947212224:AAHsHSmafFsn8ZlWz8xt7odpXXkqcN4VovU',
+        chatID = '424383040';
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form)
+        const object = {};
+        formData.forEach((value, key) => {
+            object[key] = value
+        })
+        fetch(`https://api.telegram.org/bot${telegramTookenBot}/sendMessage`, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatID,
+                text: `Name : ${object.name} Phone: ${object.phone}`
+            })
+        })
+        const json = JSON.stringify(object)
+
+    })
+
+
 });
