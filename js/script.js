@@ -99,7 +99,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const openModalBtn = document.querySelectorAll("[data-modal]"), // querySelectortAll bolgani un tog'ridan - to'g'ri amal qo'sha olmaymiz
         modal = document.querySelector('.modal'),
-        modalCloseBtn = document.querySelector('[data-modal-close]'),
         modalContent = document.querySelector(".modal__content");
 
 
@@ -121,11 +120,11 @@ window.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = ''
     };
 
-    modalCloseBtn.addEventListener('click', closeModal);
+
 
     // ekranni click qilganda ochilib turgan element yopilish functioni
     modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
+        if (event.target === modal || event.target.getAttribute('data-modal-close') === '') {
             closeModal()
         }
     })
@@ -258,8 +257,23 @@ window.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form"),
         telegramTookenBot = '7947212224:AAHsHSmafFsn8ZlWz8xt7odpXXkqcN4VovU',
         chatID = '424383040';
+
+    const message = {
+        loading: 'Loading...',
+        succes: 'Thanks for contacting us',
+        failure: 'Somthing went wrong'
+    }
+
+
     form.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        const loader = document.createElement('div')
+        loader.classList.add('loader')
+        loader.style.width = '20px'
+        loader.style.height = '20px'
+        loader.style.marginTop = "20px"
+        form.append(loader)
 
         const formData = new FormData(form)
         const object = {};
@@ -273,10 +287,31 @@ window.addEventListener("DOMContentLoaded", () => {
                 chat_id: chatID,
                 text: `Name : ${object.name} Phone: ${object.phone}`
             })
-        })
-        const json = JSON.stringify(object)
-
+        }).then(() => { showStatus(message.succes) })
+        form.reset()
+            .catch(() => { showStatus(message.failure) })
+            .finally(() => loader.remove())
     })
 
+    function showStatus(message) {
+        const modalDialog = document.querySelector('.modal__dialog')
+        modalDialog.classList.add('hide')
+        OpenModal()
 
+        const statusModal = document.createElement('div')
+        statusModal.classList.add('modal__dialog')
+        statusModal.innerHTML =
+            ` <div class="modal__content">
+                <div data-modal-close class="modal__close">&times;</div>
+                <div class="modal__title">${message}</div>
+                </div>
+            `
+        document.querySelector('.modal').append(statusModal)
+        setTimeout(() => {
+            statusModal.remove()
+
+            modalDialog.classList.remove('hide')
+            closeModal()
+        }, 4000)
+    }
 });

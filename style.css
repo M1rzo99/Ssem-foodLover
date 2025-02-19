@@ -983,7 +983,9 @@ form button {
     height: 48px;
     border-radius: 50%;
     position: relative;
-    animation: rotate 1s linear infinite
+    animation: rotate 1s linear infinite;
+    display: block;
+    margin: 0 auto;
 }
 
 .loader::before {
@@ -992,7 +994,7 @@ form button {
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 5px solid #FFF;
+    border: 5px solid #be2b2b;
     animation: prixClipFix 2s linear infinite;
 }
 
