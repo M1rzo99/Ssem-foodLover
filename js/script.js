@@ -177,33 +177,30 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const offers = [{
-        src: "./img/offer1.png",
-        alt: "Quattro Pasta",
-        title: "Quattro Pasta",
-        descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-        discount: 55,
-        sale: 20
-    }, {
-        src: "./img/offer2.png",
-        alt: "Gluten-Free Pasta",
-        title: "Gluten-Free Pasta",
-        descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-        discount: 75,
-        sale: 25
-    }, {
-        src: "./img/offer3.png",
-        alt: "Vegertarian Pasta",
-        title: "Vegertarian Pasta",
-        descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-        discount: 80,
-        sale: 40
-    }];
+    // const offers = [{
+    //     src: "./img/offer1.png",
+    //     alt: "Quattro Pasta",
+    //     title: "Quattro Pasta",
+    //     descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+    //     discount: 55,
+    //     sale: 20
+    // }, {
+    //     src: "./img/offer2.png",
+    //     alt: "Gluten-Free Pasta",
+    //     title: "Gluten-Free Pasta",
+    //     descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+    //     discount: 75,
+    //     sale: 25
+    // }, {
+    //     src: "./img/offer3.png",
+    //     alt: "Vegertarian Pasta",
+    //     title: "Vegertarian Pasta",
+    //     descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+    //     discount: 80,
+    //     sale: 40
+    // }];
 
-    offers.forEach(event => {
-        const { src, alt, title, descr, discount, sale } = event
-        new OfferMenu(src, alt, title, descr, discount, sale, ".offers-items").render()
-    })
+
 
     // change html daytime-items section to class
 
@@ -226,6 +223,19 @@ window.addEventListener("DOMContentLoaded", () => {
             this.parent1.append(parDiv)
         }
     }
+
+    fetch("http://localhost:3000/offers", {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+        }).then((res) => res.json())
+        .then((data) => {
+            data.forEach(event => {
+                const { src, alt, title, descr, discount, sale } = event
+                new OfferMenu(src, alt, title, descr, discount, sale, ".offers-items").render()
+            })
+        })
+
+
     const offers1 = [{
         src: "./img/breckfastIcon.png",
         alt: "Breakfast",
@@ -247,6 +257,7 @@ window.addEventListener("DOMContentLoaded", () => {
         title: "Dessert",
         descr: ' all day'
     }]
+
     offers1.forEach(event => {
         const { src, alt, title, descr } = event
         new DayTime(src, alt, title, descr, ".daytime-items").render()
