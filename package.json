@@ -18,5 +18,10 @@
     "homepage": "https://github.com/M1rzo99/Ssem-foodLover#readme",
     "dependencies": {
         "json-server": "^1.0.0-beta.3"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.20.0",
+        "eslint": "^9.20.1",
+        "globals": "^16.0.0"
     }
 }
