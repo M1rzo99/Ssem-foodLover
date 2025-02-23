@@ -609,17 +609,18 @@ form button {
 
 .offer__slide img {
     width: 100%;
-    height: 400px;
+    height: 500px;
     object-fit: cover;
+}
+
+.offer {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 .offer__slider-wrapper {
     width: 100%;
-    margin-top: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
-    display: grid;
-    grid-template-columns: 50% 50%;
-    border-radius: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -633,7 +634,7 @@ form button {
     background-color: #383848;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 400px;
+    height: 100%;
 }
 
 .offer__slide_description h2 {
@@ -912,9 +913,6 @@ form button {
     }
 }
 
-
-/* For animations  */
-
 @keyframes wiggle {
     from {
         transform: rotate(0deg);
@@ -946,22 +944,19 @@ form button {
     }
 }
 
-.modal__fade {
-    animation-name: modalfade;
-    animation-duration: 0.5s
+.modal_fade {
+    animation-name: modalFade;
+    animation-duration: 0.5s;
 }
 
-@keyframes modalfade {
+@keyframes modalFade {
     from {
         transform: translateY(-100px);
     }
     to {
-        transform: translateY (0);
+        transform: translateY(0);
     }
 }
-
-
-/* loader uchun */
 
 .loader-wrapper {
     width: 100%;
@@ -972,52 +967,30 @@ form button {
     position: fixed;
     left: 0;
     right: 0;
-    top: 0;
     bottom: 0;
+    top: 0;
     z-index: 50;
-    background-color: #000
+    background-color: #000;
 }
 
 .loader {
     width: 48px;
     height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: #ff3d00;
     border-radius: 50%;
-    position: relative;
-    animation: rotate 1s linear infinite;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
     display: block;
     margin: 0 auto;
 }
 
-.loader::before {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    inset: 0px;
-    border-radius: 50%;
-    border: 5px solid #be2b2b;
-    animation: prixClipFix 2s linear infinite;
-}
-
-@keyframes rotate {
-    100% {
-        transform: rotate(360deg)
-    }
-}
-
-@keyframes prixClipFix {
+@keyframes rotation {
     0% {
-        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
-    }
-    25% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
-    }
-    50% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
-    }
-    75% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+        transform: rotate(0deg);
     }
     100% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+        transform: rotate(360deg);
     }
 }
