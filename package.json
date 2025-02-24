@@ -1,27 +1,18 @@
 {
-    "name": "restaurant",
-    "version": "1.0.0",
-    "description": "make you happy",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/M1rzo99/Ssem-foodLover.git"
-    },
-    "author": "Mirzo/en",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/M1rzo99/Ssem-foodLover/issues"
-    },
-    "homepage": "https://github.com/M1rzo99/Ssem-foodLover#readme",
-    "dependencies": {
-        "json-server": "^1.0.0-beta.3"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.20.0",
-        "eslint": "^9.20.1",
-        "globals": "^16.0.0"
-    }
+	"name": "restaurant",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Samar Badriddinov",
+	"license": "ISC",
+	"dependencies": {
+		"json-server": "^1.0.0-alpha.21"
+	},
+	"devDependencies": {
+		"eslint": "^8.56.0",
+		"webpack": "^5.89.0",
+		"webpack-cli": "^5.1.4"
+	}
 }
