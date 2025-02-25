@@ -1,5 +1,4 @@
 'use strict'
-
 import classCard from './modules/class'
 import forms from './modules/forms'
 import loader from './modules/loader'
